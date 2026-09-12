@@ -9,6 +9,7 @@ tsconfig.tsbuildinfo
 private/
 .replit
 replit.nix
-.quartz/
+.quartz/plugins/*/node_modules
+.quartz/plugins/*/dist
 quartz/cli/tui/dist/
 .turbo/

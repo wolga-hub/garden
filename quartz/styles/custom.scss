@@ -1,3 +1,206 @@
 @use "./variables.scss" as *;
-
 // put your custom CSS here!
+body {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.explorer.collapsed {
+  flex: 0 1.8rem;
+}
+
+.explorer-content {
+  .nav-file-title {
+    font-weight: 400;
+  }
+}
+
+.explorer-content {
+  .nav-file-title,
+  .folder-button .folder-title {
+    font-family: var(--bodyFont);
+    font-size: 0.85rem;        // тот же размер, что у обычного текста/заметок
+    font-weight: 400;
+    color: var(--secondary);
+    text-decoration: none;
+    /* 1. Настройка переноса и межстрочного расстояния */
+    line-height: 1.25;         /* Плотный интервал для многострочных пунктов */
+    display: block;            /* или inline-block / flex */
+    white-space: normal;       /* Разрешаем перенос текста на новую строку */
+    word-break: break-word;    /* Корректный перенос длинных слов */
+
+    /* 2. Отступы между блоками элементов меню */
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
+
+    &:hover {
+      color: var(--tertiary);
+    }
+  }
+}
+
+.content-meta {
+  font-size: 1rem;
+  font-family: Caveat;
+  color: var(--gray);
+  font-weight: 400;
+
+  time {
+    color: var(--gray);
+  }
+
+  span {
+    &::before {
+      content: "·";
+      margin: 0 0.3rem;
+    }
+  }
+}
+
+.backlinks {
+  font-size: 1rem;
+  font-family: var(--bodyFont);
+  color: var(--gray);
+  font-weight: 400;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.page-listing > p:first-child {
+  display: none;
+}
+
+.page-listing {
+  .meta {
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-family: var(--bodyFont); // или var(--codeFont), если хотите отличать от текста
+
+    time {
+      color: var(--gray);
+    }
+  }
+}
+
+.note-properties {
+  font-size: 0.85rem;
+  color: var(--gray);
+  border: 0px solid var(--lightgray);
+  border-radius: 5px;
+  padding: 0rem 0.5rem 0.75rem 0;
+  margin: 1rem 0;
+
+  .note-properties-header {
+    cursor: pointer;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    .note-properties-title {
+      font-family: var(--bodyFont);
+    }
+
+    .note-properties-count {
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+  }
+
+  .note-properties-table {
+    width: 100%;
+    margin-top: 0.5rem;
+    border-collapse: collapse;
+
+    .note-properties-key {
+      color: var(--gray);
+      font-size: 0.75rem;
+      font-weight: 400;
+      padding: 0.2rem 0.5rem 0.2rem 0;
+      vertical-align: top;
+    }
+
+    .note-properties-value {
+      color: var(--darkgray);
+    }
+  }
+}
+
+ul.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem 0;
+
+  .tag-link {
+    display: inline-block;
+    background-color: var(--highlight);
+    color: var(--secondary);
+    font-size: 0.8rem;
+    font-family: var(--bodyFont);
+    font-weight: 400;
+    text-decoration: none;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px; // полностью скруглённые "капсулы"
+
+    &:hover {
+      background-color: var(--tertiary);
+      color: var(--light);
+    }
+  }
+}
+
+.breadcrumb-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 0.5rem 0 1.5rem 0;
+
+  .breadcrumb-element {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: var(--gray);
+      font-weight: 400;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--tertiary);
+        text-decoration: none;
+      }
+    }
+
+    p {
+      margin: 0 0.3rem;
+      color: var(--lightgray);
+    }
+
+    &:last-child a {
+      color: var(--gray);
+      text-decoration: none;
+      pointer-events: none; // текущая страница не кликабельна визуально
+    }
+  }
+}

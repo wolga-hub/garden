@@ -1,0 +1,66 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - v5
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Rebuild explorer plugin
+        run: |
+          cd .quartz/plugins/explorer
+          npm install
+          npx tsup
+
+      - name: Rebuild note-properties plugin
+        run: |
+          cd .quartz/plugins/note-properties
+          npm install
+          npx tsup
+
+      - name: Build Quartz site
+        run: node quartz/bootstrap-cli.mjs build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
